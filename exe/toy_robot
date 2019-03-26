@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'toy_robot'
+
+# Initializes a new instance of the cli class
+cli = ToyRobot::CLI.new
+# Gets commands from a file and transform it into an array of commands which can be used by the program
+commands = cli.load_commands(ARGV[0])
+# Run the array of commands in the program so that it does something
+cli.run(commands)
