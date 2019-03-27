@@ -1,4 +1,9 @@
 module ToyRobot
+  # This class makes the robot do things based on commands
+  # If the robot was a chess piece and the table was the chess board, the simulator is the person playing the game and moving the robot around the board
+  # It can trigger the robot to use the methods in its class, ie. move and turn
+  # It will only move the robot to places where it is allowed to, ie. cannot move outside the board
+  # It can report the position that the robot is on the board at any given time
   class Simulator
 
     attr_reader :robot
@@ -16,6 +21,7 @@ module ToyRobot
     end
 
     def move
+      return unless @table.valid_location?(robot.next_move)
       robot.move
     end
 

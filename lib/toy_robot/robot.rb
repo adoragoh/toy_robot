@@ -11,6 +11,19 @@ module ToyRobot
       @direction = direction
     end
 
+    def next_move
+      case @direction
+      when "NORTH"
+        [@east, @north + 1]
+      when "SOUTH"
+        [@east, @north - 1]
+      when "EAST"
+        [@east + 1, @north]
+      when "WEST"
+        [@east - 1, @north]
+      end
+    end
+
     def move
       # case @direction
       # when "NORTH" then move_north
