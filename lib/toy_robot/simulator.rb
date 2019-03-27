@@ -21,7 +21,7 @@ module ToyRobot
     end
 
     def move
-      return unless @table.valid_location?(robot.next_move)
+      return unless @table.valid_location?(robot.next_move.first, robot.next_move.last)
       robot.move
     end
 
