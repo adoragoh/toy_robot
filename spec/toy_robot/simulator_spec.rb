@@ -24,9 +24,29 @@ RSpec.describe ToyRobot::Simulator do
     expect(subject.robot).to be_nil
   end
 
+  it "does not have the robot placed by default" do
+    expect(subject.robot_placed?).to eq(false)
+  end
+
+  it "does not move the robot" do
+    expect { subject.move }.to_not raise_error
+  end
+
+  it "turning an unplaced robot left does not cause an exception" do
+    expect { subject.turn_left }.to_not raise_error
+  end
+
+  it "turning an unplaced robot right does not cause an exception" do
+    expect { subject.turn_right }.to_not raise_error
+  end
+
+  it "asking an unplaced robot to report does not cause an exception" do
+    expect { subject.report }.to_not raise_error
+  end
+
   context "when the robot has been placed" do
     # Create an instance of 'robot'
-    let (:robot) { instance_double(ToyRobot::Robot) }
+    let (:robot) { instance_double(ToyRobot::Robot, next_move: [0, 0]) }
     # Ensure that the simulator has an instance of a robot to play with
     before { allow(subject).to receive(:robot).and_return(robot) }
 
@@ -48,6 +68,10 @@ RSpec.describe ToyRobot::Simulator do
     it "tells the robot to report" do
       expect(robot).to receive(:report) { { north: 3, east: 3, direction: "NORTH" } }
       subject.report
+    end
+
+    it "has a placed robot" do
+      expect(subject.robot_placed?).to eq(true)
     end
   end
 

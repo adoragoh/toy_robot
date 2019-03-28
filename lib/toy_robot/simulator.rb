@@ -20,20 +20,28 @@ module ToyRobot
       @robot = Robot.new(east, north, facing)
     end
 
+    def robot_placed?
+      !robot.nil?
+    end
+
     def move
-      return unless @table.valid_location?(robot.next_move.first, robot.next_move.last)
+      return unless robot_placed?
+      return unless @table.valid_location?(*robot.next_move)
       robot.move
     end
 
     def turn_left
+      return unless robot_placed?
       robot.turn_left
     end
 
     def turn_right
+      return unless robot_placed?
       robot.turn_right
     end
 
     def report
+      return unless robot_placed?
       position = robot.report
       puts "The robot is currently at #{position[:east]}, #{position[:north]} and is facing #{position[:direction]}."
     end
